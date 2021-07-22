@@ -18,6 +18,10 @@ Séries
         @foreach ($series as $series)
         <li class="list-group-item d-flex justify-content-between align-items-center"> {{ $series->nome }}
             <form method="post" action="/series/{{ $series->id }}" onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes ($series->nome) }}?')">
+                
+                <a href="/series/{{$series->id}}/temporadas" class="btn btn-info btn-sm">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

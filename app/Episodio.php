@@ -12,6 +12,6 @@ class Episodio extends Model
 
     public function temporada()
     {
-        return $this->hasMany(Temporada::class);
+        return $this->belongsTo(Temporada::class);
     }
 }

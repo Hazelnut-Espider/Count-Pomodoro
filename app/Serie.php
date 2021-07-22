@@ -9,7 +9,7 @@ class Serie extends Model
     public $timestamps = false;
     protected $fillable = ['nome'];
 
-    public function temporada()
+    public function temporadas()
     {
         return $this->hasMany(Temporada::class);
     }
