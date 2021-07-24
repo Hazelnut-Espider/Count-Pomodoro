@@ -9,6 +9,10 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Services\CriadorDeSerie;
 use App\Temporada;
 use App\Episodio;
+use App\Services\RemovedorDeSerie;  
+
+
+
 
 
 
@@ -31,12 +35,16 @@ class SeriesController extends Controller
     public function store(
         SeriesFormRequest $request, 
         CriadorDeSerie $criadorDeSerie
-    ) {
+    ) 
+    
+    {
         $serie = $criadorDeSerie->criarSerie(
             $request->nome, 
             $request->qtd_temporadas, 
-            $request->ep_por_temporada
+            $request->ep_por_temporadas
         );
+
+        
 
         $request->session()
         ->flash(
@@ -45,19 +53,13 @@ class SeriesController extends Controller
         );
 
         return redirect()->route('listar_series');
+        
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, RemovedorDeSerie $removedorDeSerie)
     {
-        $serie = Serie::find($request->id);
-        $nomeSerie = $serie->nome;
-        $serie->temporadas->each(function(Temporada $temporada){
-            $temporada->episodios->each(function(Episodio $episodio){
-                $episodio->delete();
-            });
-            $temporada->delete();
-        });
-        $serie->delete();
+        
+        $nomeSerie = $removedorDeSerie->removerSerie($request->id);
         
         $request->session()
         ->flash(
