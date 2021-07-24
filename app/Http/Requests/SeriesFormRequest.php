@@ -25,6 +25,7 @@ class SeriesFormRequest extends FormRequest
     {
         return [
                 'nome'=>'required|min:2'
+                
         ];
     }
 
@@ -33,6 +34,7 @@ class SeriesFormRequest extends FormRequest
         return[
             'nome.required' => 'O campo :attribute é obrigatorio',
             'nome.min' => 'O campo nome precisa ter pelo menos 2 caracteres'
+            
         ];
 
     }
