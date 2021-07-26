@@ -6,6 +6,8 @@ use App\Http\Controllers\TemporadasController;
 use App\Http\Controllers\EpisodiosController;
 //use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EntrarController;
+use App\Http\Controllers\RegistroController;
+
 
 
 
@@ -37,6 +39,8 @@ Route::post('/temporadas/{temporada}/episodios/assistir', [EpisodiosController::
 
 Route::get('/entrar', [EntrarController::class, 'index']);
 Route::post('/entrar', [EntrarController::class, 'entrar']);
+Route::get('/registrar', [RegistroController::class, 'create']);
+Route::post('/registrar', [RegistroController::class, 'store']);
 
 
 
