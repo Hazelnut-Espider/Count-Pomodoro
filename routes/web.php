@@ -8,10 +8,9 @@ use App\Http\Controllers\EpisodiosController;
 //use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EntrarController;
 use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\RedirectResponse;
-
-
-
+use App\Http\Controllers\TimerController;
 
 
 /*
@@ -28,7 +27,7 @@ use Illuminate\Http\RedirectResponse;
 
 
 
-Route::get( '/series',  [SeriesController::class, 'index'])->name('listar_series');
+Route::get( '/series',  [SeriesController::class, 'index'])->name('listar_series')->middleware('autenticador');
 Route::get('/series/adicionar', [SeriesController::class, 'create'])->name('form_criar_serie')->middleware('autenticador');
 Route::post('/series/adicionar', [SeriesController::class, 'store'])->middleware('autenticador');
 Route::delete('/series/{id}', [SeriesController::class, 'destroy'])->middleware('autenticador');
@@ -38,16 +37,18 @@ Route::get('/temporadas/{temporada}/episodios', [EpisodiosController::class, 'in
 Route::post('/temporadas/{temporada}/episodios/assistir', [EpisodiosController::class, 'assistir'])->middleware('autenticador');
 //Auth::routes();
 
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/timer', [TimerController::class, 'index']);
 
-Route::get('/entrar', [EntrarController::class, 'index']);
-Route::post('/entrar', [EntrarController::class, 'entrar']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [EntrarController::class, 'index']);
+Route::post('/login', [EntrarController::class, 'entrar']);
 Route::get('/registrar', [RegistroController::class, 'create']);
 Route::post('/registrar', [RegistroController::class, 'store']);
 
 Route::get('/sair', function(){
     Auth::logout();
-    return redirect('/entrar');
+    return redirect('/login');
 });
 
 

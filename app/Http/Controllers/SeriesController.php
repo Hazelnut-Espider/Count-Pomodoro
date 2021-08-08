@@ -9,17 +9,14 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Services\CriadorDeSerie;
 use App\Temporada;
 use App\Episodio;
-use App\Services\RemovedorDeSerie;  
-
-
-
+use App\Services\RemovedorDeSerie;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('autenticador');
     }
     
     public function index(Request $request) { 
