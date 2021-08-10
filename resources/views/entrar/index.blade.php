@@ -23,7 +23,7 @@
             Enter
         </button>
 
-        <a href="/registrar" class="btn btn-secondary mt-3">
+        <a href="/register" class="btn btn-secondary mt-3">
             Register
         </a>
     </form>

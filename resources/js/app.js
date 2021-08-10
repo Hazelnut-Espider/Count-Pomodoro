@@ -2,17 +2,18 @@ require('./bootstrap');
 
 "use strict"
        
-var mm = 25; //const para variaveis estaticas
-var ss = 0; //let muda os valores de forma local(scopo) /****var = muda os valores de forma global***///
+var min = 25; //const para variaveis estaticas
+var sec = 0; //let muda os valores de forma local(scopo) /****var = muda os valores de forma global***///
 
-var tempo = 1000; // tempo em ms = 1s
+var tempo = 25; // tempo em ms = 1s
 var cron = 0;
 var isPaused = false;
+var mode = 'pomodoro'
 
 function start(event){
 
     if(cron == 0){
-        cron = setInterval(timer, tempo); //ele vai chamar na tela o contador e vai expor o funcionamento rodando
+        cron = setInterval(timer, tempo); //ele vai chamar na tela o contador e vai exporform o funcionamento rodando
     }
 
 }
@@ -28,35 +29,105 @@ function pause(){
 }
 
 function stop(){
-    if(cron > 0){
-        clearInterval(cron);
-    }
-    mm = 25;
-    ss = 0;
+    if (confirm("The timer is still running, are you sure you want to stop it?")) {
+        if(cron > 0){
+            clearInterval(cron);
+            cron = 0
+        }
 
-    document.getElementById('counter').innerHTML = '25:00';
+        console.log(mode)
+        if (mode == 'pomodoro') {
+            console.log('entrei no modo pomodoro e vou salvar')
+            document.getElementById('totalTime').value = 25 - min;
+        }
+
+        min = 25;
+        sec = 0;
+    
+        document.getElementById('counter').innerHTML = '25:00';
+       
+    }
+    
 }
 
 function timer(){
     
-    if(ss == 0){
-        if (mm == 0){
-            stop(cron);
+    if(sec == 0){
+        if (min == 0){
+            stop();
         }
-        ss = 59;
-        mm--;
+        sec = 60;
+        min--;
     }
 
-    ss--;
+    sec--;
 
-    var format = (mm < 10 ? "0" + mm : mm) + ":" + (ss < 10 ? "0" + ss : ss);
+    writeTimeLeft()
+}
+
+function timerShort(){
+    if (cron) {
+        if (confirm("The timer is still running, are you sure you want to switch?")) {
+            mode = 'short'
+            stop()
+            min = 5
+            sec = 0
+            writeTimeLeft()
+        }
+    } else {
+        min = 5
+        sec = 0
+        writeTimeLeft()
+    }
+}  
+
+function timerLong(){
+    if (cron) {
+        if (confirm("The timer is still running, are you sure you want to switch?")) {
+            mode = 'long'
+            stop()
+            min = 10
+            sec = 0
+            writeTimeLeft()
+        }
+    } else {
+        min = 10
+        sec = 0
+        writeTimeLeft()
+    }
+} 
+
+
+function pomodoro () {
+    if (cron) {
+        if (confirm("The timer is still running, are you sure you want to switch?")) {
+            stop()
+            min = 25
+            sec = 0
+            writeTimeLeft()
+        }
+    } else {
+        min = 25
+        sec = 0
+        writeTimeLeft()
+    }
+    mode = 'pomodoro'
+}
+
+function writeTimeLeft() {
+    const format = (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
     document.getElementById('counter').innerText = format;
 }
+
 
 window.onload = function(){
     document.getElementById('start').addEventListener("click", start); 
     document.getElementById('pause').addEventListener("click", pause);
     document.getElementById('stop').addEventListener("click", stop);
+    document.getElementById('pomodoro').addEventListener("click", pomodoro);
+    document.getElementById('short').addEventListener("click", timerShort);
+    document.getElementById('long').addEventListener("click", timerLong);
 
+    writeTimeLeft()
 }
 

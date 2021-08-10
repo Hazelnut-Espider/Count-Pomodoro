@@ -22,7 +22,7 @@ class RegistroController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('listar_series');
+        return redirect()->route('timer');
 
     }
 }
