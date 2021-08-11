@@ -1,11 +1,12 @@
 @extends('layout')
 
 @section('cabecalho')
- Countdown Pomodoro
+<i class="fas fa-hourglass-start"></i> Countdown Pomodoro <i class="fas fa-stopwatch-20"></i>
 @endsection
 
 @section('conteudo')
-
+    @include('erros', ['errors' => $errors])
+    
     
 <div class="max-width">
     <button id="start" class="btn btn-success ms-4">Start</button>
@@ -23,11 +24,15 @@
         @csrf
         <div class="form-group mb-2">
             <label for="totalTime">Total study time:</label>
-            <input type="number" name="totalTime" id="totalTime" required class="form-control" placeholder="total time">
+            <input type="number" name="totalTime" id="totalTime" required class="form-control" placeholder="total time" disabled>
         </div>
     
-        <button type="submit" class="btn btn-primary mb-2">Register time</button>
-    
+        <button onclick="saveTime()" type="submit" class="btn btn-primary mb-2">Save</button>
+        <script>
+        function saveTime(){
+            confirm("Are you sure you want to save it?");
+        }
+        </script>
     </form>
 </div>
 

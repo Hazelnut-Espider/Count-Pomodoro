@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
- Ranking Pomodoro
+ <i class="fas fa-trophy"></i> Ranking Pomodoro <i class="fas fa-user-friends"></i>
 @endsection 
 
 @section('conteudo')

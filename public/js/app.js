@@ -1848,7 +1848,7 @@ var min = 25; //const para variaveis estaticas
 
 var sec = 0; //let muda os valores de forma local(scopo) /****var = muda os valores de forma global***///
 
-var tempo = 25; // tempo em ms = 1s
+var tempo = 1000; // tempo em ms = 1s
 
 var cron = 0;
 var isPaused = false;
@@ -1867,33 +1867,57 @@ function pause() {
   } else {
     clearInterval(cron);
     isPaused = true;
+    cron = 0;
   }
 }
 
 function stop() {
-  if (confirm("The timer is still running, are you sure you want to stop it?")) {
+  if (min > 0) {
+    if (mode == 'pomodoro') {
+      if (confirm("The timer is still running, are you sure you want to stop it?")) {
+        if (cron > 0) {
+          clearInterval(cron);
+          cron = 0;
+        }
+
+        document.getElementById('totalTime').value = 25 - min;
+        min = 25;
+        sec = 0;
+        document.getElementById('counter').innerHTML = '25:00';
+      }
+    } else {
+      if (cron > 0) {
+        clearInterval(cron);
+        cron = 0;
+      }
+
+      if (mode == 'short') min = 5;
+      if (mode == 'long') min = 10;
+      sec = 0;
+    }
+  } else {
+    if (mode == 'pomodoro') {
+      document.getElementById('totalTime').value = 25 - min;
+    }
+
     if (cron > 0) {
       clearInterval(cron);
       cron = 0;
     }
 
-    console.log(mode);
-
-    if (mode == 'pomodoro') {
-      console.log('entrei no modo pomodoro e vou salvar');
-      document.getElementById('totalTime').value = 25 - min;
-    }
-
-    min = 25;
-    sec = 0;
-    document.getElementById('counter').innerHTML = '25:00';
+    if (mode == 'short') min = 5;
+    if (mode == 'long') min = 10;
+    sec = 0; // document.getElementById('counter').innerHTML = '25:00';
   }
 }
 
 function timer() {
   if (sec == 0) {
     if (min == 0) {
+      if (mode == 'short') alert("The short break has finished!");
+      if (mode == 'long') alert("The long break has finished!");
       stop();
+      return;
     }
 
     sec = 60;
@@ -1906,7 +1930,7 @@ function timer() {
 
 function timerShort() {
   if (cron) {
-    if (confirm("The timer is still running, are you sure you want to switch?")) {
+    if (confirm("The timer is still running, are you sure you want to stop it?")) {
       mode = 'short';
       stop();
       min = 5;
@@ -1914,6 +1938,7 @@ function timerShort() {
       writeTimeLeft();
     }
   } else {
+    mode = 'short';
     min = 5;
     sec = 0;
     writeTimeLeft();
@@ -1922,7 +1947,7 @@ function timerShort() {
 
 function timerLong() {
   if (cron) {
-    if (confirm("The timer is still running, are you sure you want to switch?")) {
+    if (confirm("The timer is still running, are you sure you want to stop it?")) {
       mode = 'long';
       stop();
       min = 10;
@@ -1930,6 +1955,7 @@ function timerLong() {
       writeTimeLeft();
     }
   } else {
+    mode = 'long';
     min = 10;
     sec = 0;
     writeTimeLeft();

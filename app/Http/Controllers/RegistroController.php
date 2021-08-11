@@ -26,3 +26,5 @@ class RegistroController extends Controller
 
     }
 }
+
+// NAO APAGAR ESSA CLASS TBM

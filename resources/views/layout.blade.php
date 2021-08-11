@@ -18,13 +18,26 @@
     @yield('script')
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
-        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Home</a>
         @auth
-           <a href="/sair" class="text-danger">Quit</a>
+            <a class="navbar navbar-expand-lg" href="{{ route('ranking') }}">
+                Ranking <i class="fas fa-medal"></i>
+            </a>
+        @endauth
+
+        @auth
+            <a class="navbar navbar-expand-lg" href="{{ route('timer') }}">
+                Pomodoro <i class="fab fa-algolia"></i>
+            </a>
+        @endauth
+
+        @auth
+           <a href="/sair" class="text-danger">
+            Logout <i class="fas fa-sign-out-alt"></i>
+        </a>
         @endauth
 
         @guest
-            <a href="/entrar">Enter</a>
+            <a href="/entrar"><i class="fas fa-user-circle"></i></a>
         @endguest
    </nav>
 
@@ -32,8 +45,10 @@
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
               <h1 class="display-5 fw-bold">@yield('cabecalho')</h1>
-              <p class="col-md-8 fs-4">Save your time and be more productive.</p>
-              <p class="col-md-8 fs-4">Keeping focused and be on fire.</p>
+              @auth
+                <p class="col-md-8 fs-4">Save your time and be more productive.</p>
+                <p class="col-md-8 fs-4">Keep on fire.</p>
+              @endauth
             </div>
         </div>
         @yield('conteudo')

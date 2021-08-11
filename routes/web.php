@@ -37,20 +37,25 @@ Route::get('/temporadas/{temporada}/episodios', [EpisodiosController::class, 'in
 Route::post('/temporadas/{temporada}/episodios/assistir', [EpisodiosController::class, 'assistir'])->middleware('autenticador');
 //Auth::routes();
 
-Route::get('/timer', [TimerController::class, 'index'])->name('timer');
-Route::get('/ranking', [TimerController::class, 'ranking'])->name('ranking');
+Route::get('/timer', [TimerController::class, 'index'])->name('timer')->middleware('autenticador');
+Route::get('/ranking', [TimerController::class, 'ranking'])->name('ranking')->middleware('autenticador');
 Route::post('/timer/total', [TimerController::class, 'updateTotalTime'])->name('form_update_time')->middleware('autenticador');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/login', [EntrarController::class, 'index']);
-Route::post('/login', [EntrarController::class, 'entrar']);
+
+Route::get('/entrar', [EntrarController::class, 'index']);
+Route::post('/entrar', [EntrarController::class, 'enter']);
 Route::get('/register', [RegistroController::class, 'create']);
 Route::post('/register', [RegistroController::class, 'store']);
 
+
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Route::get('/login', [EntrarController::class, 'index']);
+
+
 Route::get('/sair', function(){
     Auth::logout();
-    return redirect('/login');
+    return redirect('/entrar');
 });
 
 

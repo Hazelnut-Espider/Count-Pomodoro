@@ -7,8 +7,15 @@ use App\User;
 
 class TimerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('autenticador');
+    }
+    
     public function index()
     {
+       
         return view('timer.index');
     }
 

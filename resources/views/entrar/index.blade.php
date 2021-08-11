@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-    Pomodoro Timer Login
+Countdown Pomodoro Login <i class="fas fa-user-clock"></i>
 @endsection
 
 @section('conteudo')
@@ -19,9 +19,7 @@
             <input type="password" name="password" id="password" required min="1" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">
-            Enter
-        </button>
+        <button onclick="logged" type="submit" class="btn btn-primary mt-3">Login</button>
 
         <a href="/register" class="btn btn-secondary mt-3">
             Register

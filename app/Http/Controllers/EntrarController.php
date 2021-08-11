@@ -9,15 +9,26 @@ class EntrarController extends Controller
 {
     public function index()
     {
-        return view('entrar.index');
+        return view('entrar.index'); // entrar aqui é a pasta com o arquivo index.blade.php dentro de resource/view/entrar
     }
 
-    public function entrar(Request $request)
+    public function enter(Request $request)
     {
-        if (!Auth::user($request->only(['email', 'password']))){
-            return redirect()->back()->withErrors('Error to authorize. User or Password invalid');
+        
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('timer');
         }
 
-        return redirect()->route('timer');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }
+// NAO APAGAR ESSE ARQUIVO

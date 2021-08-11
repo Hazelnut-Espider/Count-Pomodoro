@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-    Register
+    Register <i class="fas fa-address-card"></i>
 @endsection
 
 @section('conteudo')
@@ -23,7 +23,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">
-        Enter
+        Login
     </button>
 </form>
 @endsection
