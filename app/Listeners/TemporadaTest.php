@@ -28,3 +28,5 @@ class TemporadaTest
         //
     }
 }
+
+// It just a Test class created by Laravel

@@ -27,30 +27,13 @@ use App\Http\Controllers\TimerController;
 
 
 
-Route::get( '/series',  [SeriesController::class, 'index'])->name('listar_series')->middleware('autenticador');
-Route::get('/series/adicionar', [SeriesController::class, 'create'])->name('form_criar_serie')->middleware('autenticador');
-Route::post('/series/adicionar', [SeriesController::class, 'store'])->middleware('autenticador');
-Route::delete('/series/{id}', [SeriesController::class, 'destroy'])->middleware('autenticador');
-Route::post('/series/{id}/editaNome', [SeriesController::class, 'editaNome'])->middleware('autenticador');
-Route::get('/series/{serieId}/temporadas', [TemporadasController::class, 'index']);
-Route::get('/temporadas/{temporada}/episodios', [EpisodiosController::class, 'index']);
-Route::post('/temporadas/{temporada}/episodios/assistir', [EpisodiosController::class, 'assistir'])->middleware('autenticador');
-//Auth::routes();
-
 Route::get('/timer', [TimerController::class, 'index'])->name('timer')->middleware('autenticador');
 Route::get('/ranking', [TimerController::class, 'ranking'])->name('ranking')->middleware('autenticador');
 Route::post('/timer/total', [TimerController::class, 'updateTotalTime'])->name('form_update_time')->middleware('autenticador');
-
-
-
 Route::get('/entrar', [EntrarController::class, 'index']);
 Route::post('/entrar', [EntrarController::class, 'enter']);
 Route::get('/register', [RegistroController::class, 'create']);
 Route::post('/register', [RegistroController::class, 'store']);
-
-
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Route::get('/login', [EntrarController::class, 'index']);
 
 
 Route::get('/sair', function(){
