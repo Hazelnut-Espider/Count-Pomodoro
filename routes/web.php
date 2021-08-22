@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SeriesController;
-use App\Http\Controllers\TemporadasController;
-use App\Http\Controllers\EpisodiosController;
+// use App\Http\Controllers\SeriesController;
+// use App\Http\Controllers\TemporadasController;
+// use App\Http\Controllers\EpisodiosController;
 //use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EntrarController;
 use App\Http\Controllers\RegistroController;

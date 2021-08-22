@@ -16,7 +16,7 @@
 <body>
     
     @yield('script')
-
+<div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
         @auth
             <a class="navbar navbar-expand-lg" href="{{ route('ranking') }}">
@@ -40,6 +40,7 @@
             <a href="/entrar"><i class="fas fa-user-circle"></i></a>
         @endguest
    </nav>
+</div>
 
     <div class="container">
         <div class="p-5 mb-4 bg-light rounded-3">
@@ -54,4 +55,11 @@
         @yield('conteudo')
     </div>
 </body>
+<footer class="container">
+    <div class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between mt-2">
+        <a class="text-link alig" href="https://www.linkedin.com/in/elder-cavalcanti-39aa14170/" rel="noopener">&copy Elder Costa 2021</a>
+    </div>
+</footer>
+
+
 </html>
